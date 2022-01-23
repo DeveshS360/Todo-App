@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import './index.scss'
+import { TODO_DATA } from './constants/Tododata'
+import { Grid } from '@mui/material'
+import { TodoList } from './components/TodoList'
 
-function App() {
+export const App = () => {
+
+  const [todoData, setTodoData] = useState(TODO_DATA)
+
+  const renderTodoData = () => {
+
+      return (
+        <Grid container spacing={12}>
+          {
+            Object.keys(todoData).map(item => {
+              const renderObj = todoData[item]
+              return (
+                    <Grid item key={item}>
+                          <TodoList 
+                            type={renderObj.type} 
+                            todoData={todoData} formPath={item} 
+                            setTodoData={setTodoData} 
+                            cardsList={renderObj.cardsList}
+                          /> 
+                    </Grid>
+              )
+            })
+          }
+        </Grid>
+      )
+    }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <>
+      <h1 className='appTitle'>Welcome to Todo List App</h1>
+      {
+        todoData && Object.keys(todoData).length ? renderTodoData()
+        : null
+      }
+
+    </>
+  )
 }
 
-export default App;

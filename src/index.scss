@@ -1,0 +1,13 @@
+$app-bgclr: rgba(236, 71, 209,0.3);
+$app-tile: rgb(6, 107, 45);
+
+body{
+    background-color: $app-bgclr
+}
+
+.appTitle{
+    font-family: sans-serif;
+    font: 20rem, bold;
+    text-align: center;
+    color: $app-tile
+}
